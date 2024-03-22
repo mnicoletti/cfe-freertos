@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+    qemu-iobc:
+        container_name: "iobc_qemu"
+        restart: on-failure
+        user: "1000:1000"
+        env_file:
+            - .env
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "5m"
+                max-file: "2"
+        volumes:
+            - "${PROJECT_LOCAL_DIR}:/opt/qemu-iobc"
